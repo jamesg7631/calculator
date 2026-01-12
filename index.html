@@ -9,28 +9,31 @@
   </head>
   <body>
     <div class="calculator-container">
-      <div class="calculator-screen">Placeholder text</div>
+      <div class="calculator-screen">
+        <span class="calculator-output"></span>
+      </div>
       <div class="calculator-buttons">
-        <button class="calculator-button">(</button>
-        <button class="calculator-button">)</button>
-        <button class="calculator-button">%</button>
-        <button class="calculator-button">Clear</button>
-        <button class="calculator-button">7</button>
-        <button class="calculator-button">8</button>
-        <button class="calculator-button">9</button>
-        <button class="calculator-button">/</button>
-        <button class="calculator-button">4</button>
-        <button class="calculator-button">5</button>
-        <button class="calculator-button">6</button>
-        <button class="calculator-button">X</button>
-        <button class="calculator-button">1</button>
-        <button class="calculator-button">2</button>
-        <button class="calculator-button">3</button>
-        <button class="calculator-button">-</button>
-        <button class="calculator-button">0</button>
-        <button class="calculator-button">.</button>
-        <button class="calculator-button">=</button>
-        <button class="calculator-button">+</button>
+        <!-- Don't know if I had to use value here. Was probably a violation of "Don't Repeat Yourself" (DRY) -->
+        <button class="calculator-button" value=")">(</button>
+        <button class="calculator-button" value=")">)</button>
+        <button class="calculator-button" value="%">%</button>
+        <button class="calculator-button" value="clear">Clear</button>
+        <button class="calculator-button" value="7">7</button>
+        <button class="calculator-button" value="8">8</button>
+        <button class="calculator-button" value="9">9</button>
+        <button class="calculator-button" value="/">/</button>
+        <button class="calculator-button" value="4">4</button>
+        <button class="calculator-button" value="5">5</button>
+        <button class="calculator-button" value="6">6</button>
+        <button class="calculator-button" value="*">X</button>
+        <button class="calculator-button" value="1">1</button>
+        <button class="calculator-button" value="2">2</button>
+        <button class="calculator-button" value="3">3</button>
+        <button class="calculator-button" value="-">-</button>
+        <button class="calculator-button" value="0">0</button>
+        <button class="calculator-button" value=".">.</button>
+        <button class="calculator-button equal" value="=">=</button>
+        <button class="calculator-button" value="+">+</button>
       </div>
     </div>
   </body>
