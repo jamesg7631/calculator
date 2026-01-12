@@ -10,17 +10,21 @@ function main() {
   btnContainer.addEventListener("click", (e) => {
     let userInput = e.target.value;
     let calculatorOutputText = calculatorOutput.textContent;
-    if (!Number.isNaN()) {
-      if (userInput.length > 0 && calculatorOutputText.at(-1) in operands) {
+    if (!Number.isNaN(+userInput)) {
+      if (
+        userInput.length > 0 &&
+        operands.includes(calculatorOutputText.at(-1))
+      ) {
         calculatorOutputText += " ";
       }
-      calculatorOutputText += userInput.toString();
+      calculatorOutputText += userInput;
     } else {
       if (validateOperand(calculatorOutputText, userInput, operands)) {
         calculatorOutputText += " " + userInput.toString();
+      } else if (userInput === "clear") {
+        calculatorOutputText = "";
       }
     }
-    // Not sure why I need the line below. I was thinking cacluatorOutput was a reference to the dom elemeents text. Maybe I should have remoed.textContent
     calculatorOutput.textContent = calculatorOutputText;
   });
 
