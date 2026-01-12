@@ -30,22 +30,25 @@ function main() {
 
   // Calculate Result
   equalButton.addEventListener("click", (e) =>
-    calculateResult(calculatorOutput),
+    calculateResult(calculatorOutput.textContent, operands),
   );
 }
 
+// Struggling with Single Responsibility Principle with event listeners. I want to update the text conten. Howver, I'm not sure where I should be doing it
+// Feel like I shouldn't be doing it in the event listener. Feels like cheeting.
 function calculateResult(calculatorScreenOutput, operands) {
-  const operand = calculatorScreenOutput.find((char) =>
-    operands.includes(char),
-  );
+  const screenOutputArray = calculatorScreenOutput.split("");
+  const operand = screenOutputArray.find((char) => operands.includes(char));
+
+  // Probably a bit redundant since I just split the array already.
   if (!(operand === undefined)) {
     const parts = calculatorScreenOutput.split(operand);
     const result = operator(
-      parts[1],
-      Number.parseInt(operand(0)),
-      Number.parseInt(operand(1)),
+      operand,
+      Number.parseInt(parts[0]),
+      Number.parseInt(parts[1]),
     );
-    console.log(`Result: ${result}`);
+    document.querySelector(".calculator-output").textContent = result;
   }
 }
 
