@@ -1,8 +1,7 @@
 function main() {
   const operands = ["+", "-", "*", "/"];
   console.log("Starting Program");
-  let calculatorOutput =
-    document.querySelector(".calculator-output").textContent;
+  let calculatorOutput = document.querySelector(".calculator-output");
   const btnContainer = document.querySelector(".calculator-buttons");
   const equalButton = document.querySelector(".equal");
   // Probably a good idea to separate into a named function
@@ -10,16 +9,19 @@ function main() {
   // Adds User Input
   btnContainer.addEventListener("click", (e) => {
     let userInput = e.target.value;
+    let calculatorOutputText = calculatorOutput.textContent;
     if (!Number.isNaN()) {
-      if (userInput.length > 0 && calculatorOutput.at(-1) in operands) {
-        calculatorOutput += " ";
+      if (userInput.length > 0 && calculatorOutputText.at(-1) in operands) {
+        calculatorOutputText += " ";
       }
-      calculatorOutput += userInput.toString();
+      calculatorOutputText += userInput.toString();
     } else {
-      if (validateOperand(calculatorOutput, userInput, operands)) {
-        calculatorOutput += " " + userInput.toString();
+      if (validateOperand(calculatorOutputText, userInput, operands)) {
+        calculatorOutputText += " " + userInput.toString();
       }
     }
+    // Not sure why I need the line below. I was thinking cacluatorOutput was a reference to the dom elemeents text. Maybe I should have remoed.textContent
+    calculatorOutput.textContent = calculatorOutputText;
   });
 
   // Calculate Result
