@@ -58,7 +58,7 @@ function validateOperand(currentScreen, userInput, operand) {
   }
 
   // Ensure there cannot exist duplicate operands
-  if (currentScreen.some((char) => operand.includes(char))) {
+  if (currentScreen.split("").some((char) => operand.includes(char))) {
     return false;
   }
   return true;
