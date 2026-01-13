@@ -18,24 +18,33 @@ function main() {
         calculatorOutputText += " ";
       }
       calculatorOutputText += userInput;
-    } else if (addOperandToScreen(calculatorOutputText, userInput, operands)) {
-      calculatorOutputText += " " + userInput.toString();
-    } else if (userInput === "clear") {
-      calculatorOutputText = "";
-    } else {
-      // Not sure if I need more validation. Test and see if I cover all
-      // the test cases
-      let result = (calculatorOutput.textContent = calculateResult(
-        calculatorOutput.textContent,
-        operands,
-      ));
-      if (userInput !== "=") {
-        calculatorOutputText = `${result} ${userInput}`;
+      calculatorOutput.textContent = calculatorOutputText;
+    } else if (operands.includes(userInput)) {
+      if (isComputable(calculatorOutput.textContent)) {
+        let result = (calculatorOutput.textContent = calculateResult(
+          calculatorOutput.textContent,
+          operands,
+        ));
+        calculatorOutput.textContent = `${result} ${userInput}`;
+        return;
       } else {
-        calculatorOutputText = `${result}`;
+        calculatorOutput.textContent += ` ${userInput}`;
+        return;
       }
+    } else if (userInput === "clear") {
+      calculatorOutput.textContent = "";
+      return;
+    } else if (userInput === "=") {
+      if (isComputable(calculatorOutput.textContent)) {
+        let result = (calculatorOutput.textContent = calculateResult(
+          calculatorOutput.textContent,
+          operands,
+        ));
+        calculatorOutput.textContent = `${result}`;
+        return;
+      }
+      console.log("Can't think of a case where here is reached!");
     }
-    calculatorOutput.textContent = calculatorOutputText;
   });
 
   // Calculate Result
@@ -58,7 +67,7 @@ function main() {
         Number.parseInt(parts[0]),
         Number.parseInt(parts[1]),
       );
-      return result;
+      return round(result, 2);
     }
   }
 
@@ -76,6 +85,32 @@ function main() {
       return false;
     }
     return true;
+  }
+
+  function isComputable(currentScreen) {
+    const screenOutputArray = currentScreen.split("");
+    const operand = screenOutputArray.find((char) => operands.includes(char));
+
+    if (operand === undefined) {
+      return false;
+    }
+
+    const parts = currentScreen.split(operand);
+    if (parts.length !== 2) {
+      return false;
+    }
+    if (
+      Number.isNaN(parseInt(parts.at(0)) || Number.isNaN(parseInt(parts.at(1))))
+    ) {
+      return false;
+    }
+
+    return true;
+  }
+
+  function round(number, numberPlaces) {
+    let multiplier = 10 ** numberPlaces;
+    return Math.round(multiplier * number) / multiplier;
   }
 
   function add(number1, number2) {
